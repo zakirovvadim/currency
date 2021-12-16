@@ -1,12 +1,10 @@
 package com.example.currency.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import java.util.HashMap;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -14,25 +12,13 @@ import java.util.HashMap;
 @Table(name = "Currency")
 public class Currency {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
     @Column(name = "currency")
-    private String currencies;
+    private String currency;
     @Column(name = "rate")
     private Double rate;
-
-    @ManyToOne
-    @JsonManagedReference
-    @Nullable
-    @JoinTable(
-            name = "cube_currencies", joinColumns = @JoinColumn(name = "cur_id"),
-            inverseJoinColumns = @JoinColumn(name = "cube_id")
-    )
-    private Cube cube;
-
-//    @Column(name = "currency")
-//    private String currency;
-//    @Column(name = "rate")
-//    private Double rate;
+    @Column(name = "data")
+    private LocalDate date;
 }
